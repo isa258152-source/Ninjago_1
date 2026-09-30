@@ -1,0 +1,45 @@
+name: Build mod
+on:
+  push:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: 8.10.2
+      - run: gradle build
+
+      - name: Make one-click modpack
+        run: |
+          mkdir -p pack/overrides/mods
+          cp build/libs/sourcedragons-1.0.0.jar pack/overrides/mods/
+          URL=$(curl -s -A "sourcedragons-build" 'https://api.modrinth.com/v2/project/fabric-api/version?game_versions=%5B%221.21.1%22%5D&loaders=%5B%22fabric%22%5D' | jq -r '.[0].files[0].url')
+          curl -sL -A "sourcedragons-build" -o pack/overrides/mods/fabric-api.jar "$URL"
+          cat > pack/modrinth.index.json <<'JSON'
+          {
+            "formatVersion": 1,
+            "game": "minecraft",
+            "versionId": "1.0.0",
+            "name": "Source Dragon Powers",
+            "summary": "Elemental essences and Dragonious Form",
+            "files": [],
+            "dependencies": { "minecraft": "1.21.1", "fabric-loader": "0.16.5" }
+          }
+          JSON
+          cd pack && zip -r ../SourceDragonPowers.mrpack modrinth.index.json overrides
+
+      - name: Publish download
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: latest
+          name: Source Dragon Powers (latest)
+          files: SourceDragonPowers.mrpack
