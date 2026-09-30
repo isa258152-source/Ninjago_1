@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    { "item": "minecraft:dragon_breath" },
+    { "item": "minecraft:diamond" },
+    { "item": "minecraft:blue_ice" },
+    { "item": "minecraft:packed_ice" }
+  ],
+  "result": { "id": "sourcedragons:ice_essence", "count": 1 }
+}

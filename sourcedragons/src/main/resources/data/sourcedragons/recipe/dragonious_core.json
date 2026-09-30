@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    { "item": "sourcedragons:fire_essence" },
+    { "item": "sourcedragons:ice_essence" },
+    { "item": "sourcedragons:earth_essence" },
+    { "item": "sourcedragons:lightning_essence" },
+    { "item": "sourcedragons:tech_essence" },
+    { "item": "sourcedragons:life_essence" },
+    { "item": "minecraft:nether_star" }
+  ],
+  "result": { "id": "sourcedragons:dragonious_core", "count": 1 }
+}

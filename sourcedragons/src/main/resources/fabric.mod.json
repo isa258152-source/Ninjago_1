@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "id": "sourcedragons",
+  "version": "${version}",
+  "name": "Source Dragon Powers",
+  "description": "Four elemental essences: Fire, Ice, Earth and Lightning. Right-click to unleash each power.",
+  "environment": "*",
+  "entrypoints": { "main": ["com.example.sourcedragons.SourceDragons"] },
+  "depends": {
+    "fabricloader": ">=0.16.0",
+    "minecraft": "~1.21.1",
+    "java": ">=21",
+    "fabric-api": "*"
+  }
+}
